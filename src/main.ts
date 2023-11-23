@@ -18,6 +18,9 @@ export async function run(): Promise<void> {
 
     await fetch(api, {
       method: 'POST',
+      headers: {
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify({
         token: core.getInput('token'),
         sha: process.env.GITHUB_SHA,
