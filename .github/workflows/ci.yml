@@ -58,7 +58,3 @@ jobs:
         with:
           token: ${{ secrets.CODEYET_TOKEN }}
           api: ${{ secrets.CODEYET_API }}
-
-      - name: Print Output
-        id: output
-        run: echo "${{ steps.test-action.outputs.time }}"
