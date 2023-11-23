@@ -1,5 +1,6 @@
 import * as core from '@actions/core'
-import { wait } from './wait'
+import { existsSync } from 'fs'
+import { readFile } from 'fs/promises'
 
 /**
  * The main function for the action.
@@ -7,18 +8,22 @@ import { wait } from './wait'
  */
 export async function run(): Promise<void> {
   try {
-    const ms: string = core.getInput('milliseconds')
+    if (!existsSync('codeyet.json')) {
+      console.log('codeyet.json not found')
+      return
+    }
+    const metrics = JSON.parse(await readFile('codeyet.json', 'utf8'))
 
-    // Debug logs are only output if the `ACTIONS_STEP_DEBUG` secret is true
-    core.debug(`Waiting ${ms} milliseconds ...`)
+    const api = core.getInput('api') ?? 'https://codeyet.dev/api/v1/metrics'
 
-    // Log the current timestamp, wait, then log the new timestamp
-    core.debug(new Date().toTimeString())
-    await wait(parseInt(ms, 10))
-    core.debug(new Date().toTimeString())
-
-    // Set outputs for other workflow steps to use
-    core.setOutput('time', new Date().toTimeString())
+    await fetch(api, {
+      method: 'POST',
+      body: JSON.stringify({
+        token: core.getInput('token'),
+        sha: process.env.GITHUB_SHA,
+        metrics
+      })
+    })
   } catch (error) {
     // Fail the workflow run if an error occurs
     if (error instanceof Error) core.setFailed(error.message)
