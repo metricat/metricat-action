@@ -56,7 +56,8 @@ jobs:
         id: test-action
         uses: ./
         with:
-          milliseconds: 1000
+          token: ${{ secrets.CODEYET_TOKEN }}
+          api: ${{ secrets.CODEYET_API }}
 
       - name: Print Output
         id: output
