@@ -2769,6 +2769,9 @@ async function run() {
         const api = core.getInput('api') ?? 'https://codeyet.dev/api/v1/metrics';
         await fetch(api, {
             method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
             body: JSON.stringify({
                 token: core.getInput('token'),
                 sha: process.env.GITHUB_SHA,
