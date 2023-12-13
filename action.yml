@@ -1,6 +1,6 @@
-name: 'CodeYet'
-description: 'Upload metrics to CodeYet'
-author: 'https://codeyet.dev'
+name: 'Metricat'
+description: 'Upload metrics to Metricat'
+author: 'https://metricat.app'
 
 # Add your action's branding here. This will appear on the GitHub Marketplace.
 branding:

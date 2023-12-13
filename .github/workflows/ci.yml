@@ -56,5 +56,5 @@ jobs:
         id: test-action
         uses: ./
         with:
-          token: ${{ secrets.CODEYET_TOKEN }}
-          api: ${{ secrets.CODEYET_API }}
+          token: ${{ secrets.METRICAT_TOKEN }}
+          api: ${{ secrets.METRICAT_API }}

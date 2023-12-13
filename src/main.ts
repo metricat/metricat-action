@@ -8,13 +8,13 @@ import { readFile } from 'fs/promises'
  */
 export async function run(): Promise<void> {
   try {
-    if (!existsSync('codeyet.json')) {
-      console.log('codeyet.json not found')
+    if (!existsSync('metricat.json')) {
+      console.log('metricat.json not found')
       return
     }
-    const metrics = JSON.parse(await readFile('codeyet.json', 'utf8'))
+    const metrics = JSON.parse(await readFile('metricat.json', 'utf8'))
 
-    const api = core.getInput('api') ?? 'https://codeyet.dev/api/v1/metrics'
+    const api = core.getInput('api') ?? 'https://metricat.dev/api/v1/metrics'
 
     await fetch(api, {
       method: 'POST',
