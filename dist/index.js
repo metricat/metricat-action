@@ -2761,12 +2761,12 @@ const promises_1 = __nccwpck_require__(292);
  */
 async function run() {
     try {
-        if (!(0, fs_1.existsSync)('codeyet.json')) {
-            console.log('codeyet.json not found');
+        if (!(0, fs_1.existsSync)('metricat.json')) {
+            console.log('metricat.json not found');
             return;
         }
-        const metrics = JSON.parse(await (0, promises_1.readFile)('codeyet.json', 'utf8'));
-        const api = core.getInput('api') ?? 'https://codeyet.dev/api/v1/metrics';
+        const metrics = JSON.parse(await (0, promises_1.readFile)('metricat.json', 'utf8'));
+        const api = core.getInput('api') ?? 'https://metricat.dev/api/v1/metrics';
         await fetch(api, {
             method: 'POST',
             headers: {
@@ -2774,7 +2774,11 @@ async function run() {
             },
             body: JSON.stringify({
                 token: core.getInput('token'),
-                sha: process.env.GITHUB_SHA,
+                commit: {
+                    sha: process.env.GITHUB_SHA,
+                    headRef: process.env.GITHUB_HEAD_REF,
+                    baseRef: process.env.GITHUB_BASE_REF
+                },
                 metrics
             })
         });

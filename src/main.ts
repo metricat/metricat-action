@@ -23,7 +23,11 @@ export async function run(): Promise<void> {
       },
       body: JSON.stringify({
         token: core.getInput('token'),
-        sha: process.env.GITHUB_SHA,
+        commit: {
+          sha: process.env.GITHUB_SHA,
+          headRef: process.env.GITHUB_HEAD_REF,
+          baseRef: process.env.GITHUB_BASE_REF
+        },
         metrics
       })
     })
