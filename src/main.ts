@@ -2,7 +2,7 @@ import * as core from '@actions/core'
 import { existsSync } from 'fs'
 import { readFile } from 'fs/promises'
 
-const METRICS_FILE = "metrics.json"
+const METRICS_FILE = 'metrics.json'
 
 /**
  * The main function for the action.

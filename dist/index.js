@@ -2755,17 +2755,18 @@ exports.run = void 0;
 const core = __importStar(__nccwpck_require__(186));
 const fs_1 = __nccwpck_require__(147);
 const promises_1 = __nccwpck_require__(292);
+const METRICS_FILE = 'metrics.json';
 /**
  * The main function for the action.
  * @returns {Promise<void>} Resolves when the action is complete.
  */
 async function run() {
     try {
-        if (!(0, fs_1.existsSync)('metricat.json')) {
-            console.log('metricat.json not found');
+        if (!(0, fs_1.existsSync)(METRICS_FILE)) {
+            console.log(`${METRICS_FILE} not found`);
             return;
         }
-        const metrics = JSON.parse(await (0, promises_1.readFile)('metricat.json', 'utf8'));
+        const metrics = JSON.parse(await (0, promises_1.readFile)(METRICS_FILE, 'utf8'));
         const api = core.getInput('api') ?? 'https://metricat.dev/api/v1/metrics';
         await fetch(api, {
             method: 'POST',
@@ -2776,6 +2777,7 @@ async function run() {
                 token: core.getInput('token'),
                 commit: {
                     sha: process.env.GITHUB_SHA,
+                    runId: process.env.GITHUB_RUN_ID,
                     refName: process.env.GITHUB_REF_NAME,
                     headRef: process.env.GITHUB_HEAD_REF,
                     baseRef: process.env.GITHUB_BASE_REF
