@@ -31,7 +31,9 @@ export async function run(): Promise<void> {
       body: JSON.stringify({
         token: core.getInput('token'),
         commit: {
-          sha: context.sha,
+          sha: context.payload.pull_request
+            ? context.payload.pull_request?.head.sha
+            : context.sha,
           runId: process.env.GITHUB_RUN_ID,
           refName: process.env.GITHUB_REF_NAME,
           headRef: process.env.GITHUB_HEAD_REF,
