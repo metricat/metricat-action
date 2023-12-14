@@ -1,6 +1,9 @@
 import * as core from '@actions/core'
+import * as github from '@actions/github'
 import { existsSync } from 'fs'
 import { readFile } from 'fs/promises'
+
+const context = github.context
 
 const METRICS_FILE = 'metrics.json'
 
@@ -17,6 +20,8 @@ export async function run(): Promise<void> {
     const metrics = JSON.parse(await readFile(METRICS_FILE, 'utf8'))
 
     const api = core.getInput('api') ?? 'https://metricat.dev/api/v1/metrics'
+
+    console.log(JSON.stringify(context, null, 2))
 
     await fetch(api, {
       method: 'POST',
