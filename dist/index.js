@@ -2776,6 +2776,7 @@ async function run() {
                 token: core.getInput('token'),
                 commit: {
                     sha: process.env.GITHUB_SHA,
+                    refName: process.env.GITHUB_REF_NAME,
                     headRef: process.env.GITHUB_HEAD_REF,
                     baseRef: process.env.GITHUB_BASE_REF
                 },
