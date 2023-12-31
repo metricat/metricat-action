@@ -28941,7 +28941,7 @@ const github = __importStar(__nccwpck_require__(5438));
 const fs_1 = __nccwpck_require__(7147);
 const promises_1 = __nccwpck_require__(3292);
 const context = github.context;
-const METRICS_FILE = 'metrics.json';
+const METRICS_FILE = 'metrics';
 /**
  * The main function for the action.
  * @returns {Promise<void>} Resolves when the action is complete.
@@ -28952,9 +28952,8 @@ async function run() {
             console.log(`${METRICS_FILE} not found`);
             return;
         }
-        const metrics = JSON.parse(await (0, promises_1.readFile)(METRICS_FILE, 'utf8'));
+        const metrics = await (0, promises_1.readFile)(METRICS_FILE, 'utf8');
         const api = core.getInput('api') ?? 'https://metricat.dev/api/v1/metrics';
-        console.log(JSON.stringify(context, null, 2));
         await fetch(api, {
             method: 'POST',
             headers: {
