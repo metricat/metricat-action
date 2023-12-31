@@ -28952,7 +28952,7 @@ async function run() {
             console.log(`${METRICS_FILE} not found`);
             return;
         }
-        const metrics = await (0, promises_1.readFile)(METRICS_FILE, 'utf8');
+        const metrics = await (0, promises_1.readFile)(METRICS_FILE);
         const api = core.getInput('api') ?? 'https://metricat.dev/api/v1/metrics';
         await fetch(api, {
             method: 'POST',
@@ -28970,7 +28970,7 @@ async function run() {
                     headRef: process.env.GITHUB_HEAD_REF,
                     baseRef: process.env.GITHUB_BASE_REF
                 },
-                metrics
+                metricFile: metrics.toString('base64')
             })
         });
     }

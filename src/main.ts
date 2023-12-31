@@ -17,7 +17,7 @@ export async function run(): Promise<void> {
       console.log(`${METRICS_FILE} not found`)
       return
     }
-    const metrics = await readFile(METRICS_FILE, 'utf8')
+    const metrics = await readFile(METRICS_FILE)
 
     const api = core.getInput('api') ?? 'https://metricat.dev/api/v1/metrics'
 
@@ -37,7 +37,7 @@ export async function run(): Promise<void> {
           headRef: process.env.GITHUB_HEAD_REF,
           baseRef: process.env.GITHUB_BASE_REF
         },
-        metrics
+        metricFile: metrics.toString('base64')
       })
     })
   } catch (error) {
