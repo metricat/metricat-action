@@ -14,12 +14,12 @@ const METRICS_FILE = 'metrics'
 export async function run(): Promise<void> {
   try {
     if (!existsSync(METRICS_FILE)) {
-      console.log(`${METRICS_FILE} not found`)
+      core.warning(`Metric file not found. Skipping.`)
       return
     }
     const metrics = await readFile(METRICS_FILE)
 
-    const api = core.getInput('api') ?? 'https://metricat.app/api/v1/metrics'
+    const api = core.getInput('api') || 'https://metricat.app/api/v1/metrics'
 
     await fetch(api, {
       method: 'POST',
