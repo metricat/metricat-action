@@ -52,6 +52,10 @@ jobs:
         id: checkout
         uses: actions/checkout@v4
 
+      - name: Write metrics
+        run: |
+          echo -e "count $((1 + $RANDOM % 100))" >> metrics
+
       - name: Test Local Action
         id: test-action
         uses: ./
