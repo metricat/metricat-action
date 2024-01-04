@@ -19,7 +19,7 @@ export async function run(): Promise<void> {
     }
     const metrics = await readFile(METRICS_FILE)
 
-    const api = core.getInput('api') ?? 'https://metricat.dev/api/v1/metrics'
+    const api = core.getInput('api') ?? 'https://metricat.app/api/v1/metrics'
 
     await fetch(api, {
       method: 'POST',

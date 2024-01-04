@@ -28953,7 +28953,7 @@ async function run() {
             return;
         }
         const metrics = await (0, promises_1.readFile)(METRICS_FILE);
-        const api = core.getInput('api') ?? 'https://metricat.dev/api/v1/metrics';
+        const api = core.getInput('api') ?? 'https://metricat.app/api/v1/metrics';
         await fetch(api, {
             method: 'POST',
             headers: {
