@@ -60,5 +60,5 @@ jobs:
         id: test-action
         uses: ./
         with:
-          token: ${{ secrets.METRICAT_TOKEN }}
-          api: ${{ secrets.METRICAT_API }}
+          token: ${{ secrets.DEV_METRICAT_TOKEN }}
+          api: ${{ secrets.DEV_METRICAT_API }}
