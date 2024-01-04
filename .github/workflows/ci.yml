@@ -56,9 +56,14 @@ jobs:
         run: |
           echo -e "count $((1 + $RANDOM % 100))" >> metrics
 
-      - name: Test Local Action
+      - name: Dev - Test Local Action
         id: test-action
         uses: ./
         with:
           token: ${{ secrets.DEV_METRICAT_TOKEN }}
           api: ${{ secrets.DEV_METRICAT_API }}
+
+      - name: Prod - Test Local Action
+        uses: ./
+        with:
+          token: ${{ secrets.METRICAT_TOKEN }}
